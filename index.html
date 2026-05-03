@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Claude Calimlim — Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:        #0d0f1a;
+      --bg-2:      #11142a;
+      --bg-card:   #141728;
+      --bg-card2:  #1a1e35;
+      --border:    rgba(99,120,255,0.18);
+      --border-hi: rgba(99,120,255,0.5);
+      --blue:      #4f8ef7;
+      --blue-mid:  #3a6fd8;
+      --blue-glow: rgba(79,142,247,0.12);
+      --purple:    #7b5ef8;
+      --cyan:      #38c9f0;
+      --text:      #e8ecf7;
+      --muted:     #7a84a8;
+      --white:     #ffffff;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        radial-gradient(circle at 15% 15%, rgba(79,142,247,0.08) 0%, transparent 50%),
+        radial-gradient(circle at 85% 85%, rgba(123,94,248,0.08) 0%, transparent 50%),
+        radial-gradient(rgba(99,120,255,0.06) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 100%, 32px 32px;
+      pointer-events: none;
+      z-index: 0;
+    }
+    * { position: relative; z-index: 1; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      background: rgba(13,15,26,0.88);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2.5rem;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 60px;
+    }
+    .nav-logo {
+      font-family: 'DM Serif Display', serif; font-size: 1.1rem;
+      color: var(--white); text-decoration: none;
+      display: flex; align-items: center; gap: 0.6rem;
+    }
+    .nav-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--blue); box-shadow: 0 0 8px var(--blue);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.35} }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.78rem; font-weight: 500; color: var(--muted);
+      text-decoration: none; letter-spacing: 0.07em; text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--blue); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh; display: flex; align-items: center;
+      padding: 100px 2.5rem 4rem; max-width: 1140px; margin: 0 auto;
+    }
+    .hero-inner {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 4rem; align-items: center; width: 100%;
+    }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-size: 0.72rem; font-weight: 500; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--blue);
+      border: 1px solid var(--border-hi); background: var(--blue-glow);
+      padding: 0.35rem 0.9rem; border-radius: 2rem; margin-bottom: 1.5rem;
+    }
+    .hero-tag::before {
+      content: ''; width: 6px; height: 6px; border-radius: 50%;
+      background: var(--cyan); box-shadow: 0 0 6px var(--cyan); animation: pulse 2s infinite;
+    }
+    .hero h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.6rem, 4.5vw, 3.8rem);
+      line-height: 1.1; color: var(--white); letter-spacing: -0.03em; margin-bottom: 1.25rem;
+    }
+    .hero h1 em {
+      font-style: italic;
+      background: linear-gradient(135deg, var(--blue), var(--cyan));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .hero-desc { font-size: 1rem; color: var(--muted); font-weight: 300; line-height: 1.8; margin-bottom: 2rem; }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.75rem 1.6rem; border-radius: 0.4rem;
+      font-size: 0.88rem; font-weight: 500; text-decoration: none;
+      transition: all 0.2s; cursor: pointer; border: none;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--blue-mid), var(--blue));
+      color: white; box-shadow: 0 4px 20px rgba(79,142,247,0.3);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 28px rgba(79,142,247,0.45); }
+    .btn-outline { background: transparent; color: var(--text); border: 1px solid var(--border); }
+    .btn-outline:hover { border-color: var(--blue); color: var(--blue); transform: translateY(-2px); }
+
+    .hero-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 1.2rem; padding: 2rem;
+      box-shadow: 0 0 60px rgba(79,142,247,0.07), inset 0 1px 0 rgba(255,255,255,0.04);
+    }
+    .hero-card-top {
+      display: flex; align-items: center; gap: 1rem;
+      margin-bottom: 1.5rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--border);
+    }
+    .hero-avatar {
+      width: 48px; height: 48px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue), var(--purple));
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'DM Serif Display', serif; font-size: 1.3rem; color: white; flex-shrink: 0;
+    }
+    .hero-card-name { font-size: 1rem; font-weight: 500; color: var(--white); }
+    .hero-card-role { font-size: 0.78rem; color: var(--muted); margin-top: 0.1rem; }
+    .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 1.25rem; }
+    .stat-box {
+      background: var(--bg-card2); border: 1px solid var(--border);
+      border-radius: 0.75rem; padding: 0.9rem; text-align: center;
+    }
+    .stat-num { font-family: 'DM Serif Display', serif; font-size: 1.7rem; color: var(--blue); line-height: 1; }
+    .stat-label { font-size: 0.67rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 0.25rem; }
+    .hero-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .tag {
+      font-size: 0.72rem; padding: 0.28rem 0.7rem; border-radius: 2rem;
+      background: var(--blue-glow); color: var(--blue); border: 1px solid var(--border); font-weight: 500;
+    }
+
+    /* SECTIONS */
+    section { max-width: 1140px; margin: 0 auto; padding: 5rem 2.5rem; }
+    .section-label { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue); margin-bottom: 0.6rem; }
+    .section-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      color: var(--white); letter-spacing: -0.02em; margin-bottom: 2.5rem; line-height: 1.2;
+    }
+    .divider { height: 1px; background: var(--border); max-width: 1140px; margin: 0 auto; }
+
+    /* ABOUT */
+    .about-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 5rem; align-items: start; }
+    .about-text p { font-size: 0.97rem; color: var(--muted); font-weight: 300; line-height: 1.9; margin-bottom: 1.1rem; }
+    .about-text p strong { color: var(--text); font-weight: 500; }
+    .about-details { display: flex; flex-direction: column; gap: 0.75rem; }
+    .detail-item {
+      padding: 1rem 1.1rem; background: var(--bg-card);
+      border: 1px solid var(--border); border-radius: 0.7rem; transition: border-color 0.2s;
+    }
+    .detail-item:hover { border-color: var(--border-hi); }
+    .detail-label { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.09em; color: var(--blue); font-weight: 500; margin-bottom: 0.25rem; }
+    .detail-value { font-size: 0.88rem; color: var(--text); line-height: 1.5; }
+
+    /* EXPERIENCE */
+    .exp-list { display: flex; flex-direction: column; }
+    .exp-item {
+      display: grid; grid-template-columns: 190px 1fr;
+      gap: 2.5rem; padding: 2rem 0; border-bottom: 1px solid var(--border);
+    }
+    .exp-item:first-child { border-top: 1px solid var(--border); }
+    .exp-date { font-size: 0.78rem; color: var(--muted); padding-top: 0.2rem; line-height: 1.6; }
+    .exp-role { font-size: 1rem; font-weight: 500; color: var(--white); margin-bottom: 0.2rem; }
+    .exp-org { font-size: 0.82rem; color: var(--blue); margin-bottom: 0.75rem; font-weight: 500; }
+    .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.45rem; }
+    .exp-bullets li {
+      font-size: 0.88rem; color: var(--muted); font-weight: 300;
+      padding-left: 1.1rem; position: relative; line-height: 1.6;
+    }
+    .exp-bullets li::before { content: '›'; position: absolute; left: 0; color: var(--blue); font-size: 1rem; }
+
+    /* PROJECTS */
+    .projects-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.25rem; }
+    .project-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 1rem; padding: 1.75rem;
+      transition: all 0.25s; display: flex; flex-direction: column; gap: 0.75rem;
+      text-decoration: none; overflow: hidden;
+    }
+    .project-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--blue), var(--purple)); opacity: 0; transition: opacity 0.25s;
+    }
+    .project-card:hover { border-color: var(--border-hi); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(79,142,247,0.12); }
+    .project-card:hover::before { opacity: 1; }
+    .project-icon {
+      width: 44px; height: 44px; background: var(--blue-glow); border: 1px solid var(--border);
+      border-radius: 0.65rem; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;
+    }
+    .project-name { font-size: 0.92rem; font-weight: 500; color: var(--white); }
+    .project-desc { font-size: 0.83rem; color: var(--muted); font-weight: 300; line-height: 1.65; flex: 1; }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: auto; }
+    .project-tag {
+      font-size: 0.68rem; padding: 0.2rem 0.6rem; border-radius: 2rem;
+      background: var(--bg-card2); color: var(--muted); border: 1px solid var(--border);
+    }
+    .project-link { font-size: 0.78rem; color: var(--blue); font-weight: 500; margin-top: 0.25rem; }
+
+    /* CERTIFICATIONS */
+    .sub-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); font-weight: 500; margin-bottom: 1rem; }
+    .certs-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 0.75rem; }
+    .cert-item {
+      display: flex; align-items: flex-start; gap: 0.9rem;
+      padding: 1rem 1.1rem; background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 0.65rem; transition: border-color 0.2s;
+    }
+    .cert-item:hover { border-color: var(--border-hi); }
+    .cert-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--blue); box-shadow: 0 0 6px var(--blue); margin-top: 0.45rem; flex-shrink: 0; }
+    .cert-name { font-size: 0.85rem; font-weight: 500; color: var(--text); margin-bottom: 0.12rem; }
+    .cert-issuer { font-size: 0.75rem; color: var(--muted); }
+
+    /* AWARDS */
+    .awards-list { display: flex; flex-direction: column; gap: 0.75rem; }
+    .award-item {
+      display: flex; align-items: center; gap: 1.25rem;
+      padding: 1.25rem 1.5rem; background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 0.75rem; transition: all 0.2s;
+    }
+    .award-item:hover { border-color: var(--border-hi); box-shadow: 0 4px 20px rgba(79,142,247,0.08); }
+    .award-emoji { font-size: 1.4rem; flex-shrink: 0; }
+    .award-title { font-size: 0.9rem; font-weight: 500; color: var(--white); margin-bottom: 0.2rem; }
+    .award-org { font-size: 0.78rem; color: var(--muted); }
+    .award-year {
+      margin-left: auto; font-size: 0.78rem; color: var(--blue); white-space: nowrap;
+      font-weight: 500; background: var(--blue-glow); border: 1px solid var(--border);
+      padding: 0.2rem 0.65rem; border-radius: 2rem;
+    }
+
+    /* CONTACT */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1.3fr; gap: 5rem; align-items: start; }
+    .contact-info h3 { font-family: 'DM Serif Display', serif; font-size: 1.6rem; color: var(--white); margin-bottom: 1rem; line-height: 1.3; }
+    .contact-info p { font-size: 0.92rem; color: var(--muted); font-weight: 300; line-height: 1.85; margin-bottom: 2rem; }
+    .contact-details { display: flex; flex-direction: column; gap: 0.6rem; }
+    .contact-detail {
+      display: flex; align-items: center; gap: 0.9rem;
+      padding: 0.85rem 1rem; background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 0.6rem; font-size: 0.88rem; color: var(--text); transition: border-color 0.2s;
+    }
+    .contact-detail:hover { border-color: var(--border-hi); }
+    .contact-detail span:first-child { width: 20px; text-align: center; }
+    .contact-detail a { color: var(--blue); text-decoration: none; }
+
+    .contact-form { display: flex; flex-direction: column; gap: 1.1rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+    .form-group label { font-size: 0.72rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
+    .form-group input, .form-group textarea {
+      padding: 0.85rem 1rem; border: 1px solid var(--border); border-radius: 0.5rem;
+      font-family: 'DM Sans', sans-serif; font-size: 0.9rem; color: var(--text);
+      background: var(--bg-card); transition: border-color 0.2s, box-shadow 0.2s; outline: none; resize: none;
+    }
+    .form-group input::placeholder, .form-group textarea::placeholder { color: var(--muted); }
+    .form-group input:focus, .form-group textarea:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(79,142,247,0.1); }
+    .form-group textarea { height: 120px; }
+
+    footer {
+      border-top: 1px solid var(--border); padding: 2rem;
+      text-align: center; font-size: 0.8rem; color: var(--muted); background: var(--bg-card);
+    }
+    footer span { color: var(--blue); }
+
+    /* ANIMATIONS */
+    .fade-up { opacity: 0; transform: translateY(28px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 768px) {
+      .hero-inner, .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .projects-grid, .certs-grid { grid-template-columns: 1fr; }
+      .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
+      .nav-links { display: none; }
+      .award-item { flex-wrap: wrap; }
+      .award-year { margin-left: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="#hero" class="nav-logo"><span class="nav-dot"></span>Claude Calimlim</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#certifications">Certifications</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div id="hero" class="hero">
+    <div class="hero-inner">
+      <div class="fade-up">
+        <span class="hero-tag">Open to opportunities · Philippines</span>
+        <h1>IT Professional <em>&</em> Developer</h1>
+        <p class="hero-desc">Computer Science graduate with a passion for building accessible, AI-driven applications. Currently pursuing a Master's in Information Technology, specializing in AI & Machine Learning.</p>
+        <div class="hero-actions">
+          <a href="Claude_Calimlim_ATS_CV.docx" download class="btn btn-primary">↓ Download CV</a>
+          <a href="#contact" class="btn btn-outline">Get in touch</a>
+          <a href="https://github.com/claudecalimlim" target="_blank" class="btn btn-outline">GitHub ↗</a>
+        </div>
+      </div>
+      <div class="hero-card fade-up" style="transition-delay:0.15s">
+        <div class="hero-card-top">
+          <div class="hero-avatar">C</div>
+          <div>
+            <div class="hero-card-name">Claude L. Calimlim</div>
+            <div class="hero-card-role">BS Computer Science · MIT in Progress</div>
+          </div>
+        </div>
+        <div class="stat-grid">
+          <div class="stat-box"><div class="stat-num">2+</div><div class="stat-label">Yrs Experience</div></div>
+          <div class="stat-box"><div class="stat-num">15+</div><div class="stat-label">Certifications</div></div>
+          <div class="stat-box"><div class="stat-num">3</div><div class="stat-label">GitHub Projects</div></div>
+          <div class="stat-box"><div class="stat-num">3×</div><div class="stat-label">National Awards</div></div>
+        </div>
+        <div class="hero-tags">
+          <span class="tag">AI & ML</span><span class="tag">NLP</span><span class="tag">Python</span><span class="tag">Graphic Design</span><span class="tag">Tech Support</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <section id="about">
+    <div class="section-label">Who I am</div>
+    <div class="section-title">About Me</div>
+    <div class="about-grid fade-up">
+      <div class="about-text">
+        <p>I'm an IT professional and developer based in Iloilo, Philippines, with a background in <strong>Computer Science</strong> and a growing specialization in <strong>Artificial Intelligence and Machine Learning</strong>.</p>
+        <p>My undergraduate thesis — a sign language translator application using <strong>Neural Networks and NLP</strong> — reflects my core belief that technology should be accessible and inclusive. That same drive shapes everything I build and study today.</p>
+        <p>Beyond code, I work in communications and design, handling layout design, video production, and digital content for a state university. I enjoy the intersection of <strong>creativity and technology</strong> — and I think that combination is what makes my work distinctive.</p>
+        <p>I'm currently pursuing my <strong>Master of Information Technology</strong> at West Visayas State University, where I continue to explore AI-driven solutions to real-world problems.</p>
+      </div>
+      <div class="about-details">
+        <div class="detail-item"><div class="detail-label">Location</div><div class="detail-value">Iloilo, Philippines</div></div>
+        <div class="detail-item"><div class="detail-label">Education</div><div class="detail-value">BS Computer Science, ISAT-U (2024)<br>MIT in Progress, WVSU (2024–)</div></div>
+        <div class="detail-item"><div class="detail-label">Research Interests</div><div class="detail-value">AI, Machine Learning, NLP, Assistive Technology</div></div>
+        <div class="detail-item"><div class="detail-label">Languages</div><div class="detail-value">Filipino (Native) · English (Proficient) · Spanish (Basic)</div></div>
+        <div class="detail-item"><div class="detail-label">Civil Service Eligibility</div><div class="detail-value">Career Service Exam Passer — Professional Level</div></div>
+        <div class="detail-item"><div class="detail-label">Email</div><div class="detail-value">codebritain@gmail.com</div></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section id="experience">
+    <div class="section-label">Where I've worked</div>
+    <div class="section-title">Experience</div>
+    <div class="exp-list fade-up">
+      <div class="exp-item">
+        <div class="exp-date">Nov 2024 — Present</div>
+        <div>
+          <div class="exp-role">Admin Aide (Job Order)</div>
+          <div class="exp-org">Public Affairs & Marketing Communications Office · West Visayas State University</div>
+          <ul class="exp-bullets">
+            <li>Designed and laid out publicity and promotional materials for university-wide distribution.</li>
+            <li>Uploaded and maintained news articles on the official university website.</li>
+            <li>Documented university events and produced video highlights for official functions.</li>
+            <li>Coordinated with departments to ensure timely and accurate communications.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="exp-item">
+        <div class="exp-date">Jun 2024 — Nov 2024</div>
+        <div>
+          <div class="exp-role">Interim Employee</div>
+          <div class="exp-org">DSWD – KALAHI CIDSS Office · Pavia, Iloilo</div>
+          <ul class="exp-bullets">
+            <li>Created graphic design layouts for office decorations and event materials.</li>
+            <li>Operated audiovisual equipment as technical operator during workshops and seminars.</li>
+            <li>Assisted in photocopying, scanning, and digitization of official documents.</li>
+            <li>Organized and maintained KALAHI CIDSS files and records for easy retrieval.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section id="projects">
+    <div class="section-label">What I've built</div>
+    <div class="section-title">Projects</div>
+    <div class="projects-grid fade-up">
+      <a href="https://github.com/claudecalimlim/Gemini-LLM-Simulator" target="_blank" class="project-card">
+        <div class="project-icon">🤖</div>
+        <div class="project-name">Gemini LLM Simulator</div>
+        <div class="project-desc">A Python GUI-based chatbot powered by the Google Gemini API. Demonstrates LLM conversation handling using Tkinter for a lightweight desktop experience.</div>
+        <div class="project-tags"><span class="project-tag">Python</span><span class="project-tag">Tkinter</span><span class="project-tag">Gemini API</span><span class="project-tag">LLM</span></div>
+        <div class="project-link">View on GitHub ↗</div>
+      </a>
+      <a href="https://github.com/claudecalimlim/T1-vs-KT-Statistical-Dataset-for-Machine-Learning-Prediction" target="_blank" class="project-card">
+        <div class="project-icon">📊</div>
+        <div class="project-name">T1 vs KT — ML Prediction Dataset</div>
+        <div class="project-desc">Structured and cleaned statistical dataset from T1 vs KT Rolster LCK 2025 Season matches, built for machine learning prediction modeling and data analysis.</div>
+        <div class="project-tags"><span class="project-tag">Python</span><span class="project-tag">Machine Learning</span><span class="project-tag">Data Analysis</span></div>
+        <div class="project-link">View on GitHub ↗</div>
+      </a>
+      <a href="https://github.com/claudecalimlim/Dynamo-simulation-HTML" target="_blank" class="project-card">
+        <div class="project-icon">🔴</div>
+        <div class="project-name">Dynamo Simulation</div>
+        <div class="project-desc">A browser-based simulation inspired by Amazon's Dynamo key-value store, built to visualize data partitioning and replication concepts for educational purposes.</div>
+        <div class="project-tags"><span class="project-tag">HTML</span><span class="project-tag">CSS</span><span class="project-tag">JavaScript</span><span class="project-tag">Systems Design</span></div>
+        <div class="project-link">View on GitHub ↗</div>
+      </a>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section id="certifications">
+    <div class="section-label">Credentials</div>
+    <div class="section-title">Certifications & Awards</div>
+    <div style="margin-bottom:2.5rem;">
+      <div class="sub-label">Certifications</div>
+      <div class="certs-grid fade-up">
+        <div class="cert-item"><div class="cert-dot"></div><div><div class="cert-name">AI Essentials: Theory and Practice</div><div class="cert-issuer">UP Open University</div></div></div>
+        <div class="cert-item"><div class="cert-dot"></div><div><div class="cert-name">AI Awareness — Generative AI & AI Ethics</div><div class="cert-issuer">DICT</div></div></div>
+        <div class="cert-item"><div class="cert-dot"></div><div><div class="cert-name">She Creates with AI</div><div class="cert-issuer">DICT</div></div></div>
+        <div class="cert-item"><div class="cert-dot"></div><div><div class="cert-name">Digital Transformation 101</div><div class="cert-issuer">DICT</div></div></div>
+        <div class="cert-item"><div class="cert-dot"></div><div><div class="cert-name">Intermediate Level of Digital</div><div class="cert-issuer">DICT</div></div></div>
+        <div class="cert-item"><div class="cert-dot"></div><div><div class="cert-name">IT Customer Support Basics</div><div class="cert-issuer">Cisco</div></div></div>
+        <div class="cert-item"><div class="cert-dot"></div><div><div class="cert-name">Introduction to Cybersecurity</div><div class="cert-issuer">GlobalLogic</div></div></div>
+        <div class="cert-item"><div class="cert-dot"></div><div><div class="cert-name">Microsoft Digital Literacy</div><div class="cert-issuer">TESDA</div></div></div>
+        <div class="cert-item"><div class="cert-dot"></div><div><div class="cert-name">Risk Analysis for Project Management</div><div class="cert-issuer">UP Open University</div></div></div>
+        <div class="cert-item"><div class="cert-dot"></div><div><div class="cert-name">Introduction to Data Privacy</div><div class="cert-issuer">DICT</div></div></div>
+        <div class="cert-item"><div class="cert-dot"></div><div><div class="cert-name">Data Privacy: Good Governance</div><div class="cert-issuer">DICT</div></div></div>
+        <div class="cert-item"><div class="cert-dot"></div><div><div class="cert-name">Big Data Fundamentals</div><div class="cert-issuer">DICT</div></div></div>
+        <div class="cert-item"><div class="cert-dot"></div><div><div class="cert-name">Internet of Things — Arduino / TinkerCad</div><div class="cert-issuer">DICT</div></div></div>
+        <div class="cert-item"><div class="cert-dot"></div><div><div class="cert-name">Principles of Design</div><div class="cert-issuer">DICT</div></div></div>
+      </div>
+    </div>
+    <div class="sub-label">Awards & Recognition</div>
+    <div class="awards-list fade-up">
+      <div class="award-item">
+        <div class="award-emoji">🏆</div>
+        <div><div class="award-title">Top 5 Finalist — HACKFORGOV 2023: Cyber Challenge Competition</div><div class="award-org">Department of Information and Communication Technology (DICT) – Region VI</div></div>
+        <div class="award-year">Aug 2023</div>
+      </div>
+      <div class="award-item">
+        <div class="award-emoji">🏆</div>
+        <div><div class="award-title">Top 25 Finalist — Philippine Startup Challenge 8</div><div class="award-org">Department of Information and Communication Technology (DICT) – Region VI</div></div>
+        <div class="award-year">Oct 2023</div>
+      </div>
+      <div class="award-item">
+        <div class="award-emoji">🌐</div>
+        <div><div class="award-title">ISAT-U Representative — Starlink Bridgetech: Solution for Digital Inclusion</div><div class="award-org">Brainsparks · help.NGO · Philippine Space Agency · USAID</div></div>
+        <div class="award-year">Nov 2023</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section id="contact">
+    <div class="section-label">Let's connect</div>
+    <div class="section-title">Get in Touch</div>
+    <div class="contact-grid fade-up">
+      <div class="contact-info">
+        <h3>Open to opportunities<br>& collaborations.</h3>
+        <p>Whether you're a recruiter, a university admissions officer, or someone with an interesting project — I'd love to hear from you. I'm currently open to job opportunities locally and abroad, as well as Master's program inquiries.</p>
+        <div class="contact-details">
+          <div class="contact-detail"><span>📧</span><span>codebritain@gmail.com</span></div>
+          <div class="contact-detail"><span>📱</span><span>+63 950 895 4752</span></div>
+          <div class="contact-detail"><span>📍</span><span>Iloilo, Philippines</span></div>
+          <div class="contact-detail"><span>💻</span><a href="https://github.com/claudecalimlim" target="_blank">github.com/claudecalimlim</a></div>
+        </div>
+      </div>
+      <form class="contact-form" onsubmit="handleSubmit(event)">
+        <div class="form-group"><label>Your Name</label><input type="text" placeholder="Juan dela Cruz" required /></div>
+        <div class="form-group"><label>Email Address</label><input type="email" placeholder="juan@example.com" required /></div>
+        <div class="form-group"><label>Message</label><textarea placeholder="Hi Claude, I'd like to connect about..."></textarea></div>
+        <button type="submit" class="btn btn-primary" style="align-self:flex-start;">Send Message →</button>
+        <div id="form-msg" style="font-size:0.85rem;color:var(--blue);display:none;">✓ Message sent! I'll get back to you soon.</div>
+      </form>
+    </div>
+  </section>
+
+  <footer><p>© 2026 <span>Claude L. Calimlim</span> · Iloilo, Philippines · Built with HTML, CSS & JS</p></footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    function handleSubmit(e) {
+      e.preventDefault();
+      const msg = document.getElementById('form-msg');
+      msg.style.display = 'block';
+      e.target.reset();
+      setTimeout(() => msg.style.display = 'none', 5000);
+    }
+
+    const sections = document.querySelectorAll('section[id], div[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(s => { if (window.scrollY >= s.offsetTop - 100) current = s.getAttribute('id'); });
+      navLinks.forEach(link => {
+        link.style.color = link.getAttribute('href') === `#${current}` ? 'var(--blue)' : '';
+      });
+    });
+  </script>
+</body>
+</html>
